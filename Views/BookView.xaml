@@ -12,31 +12,43 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Margin="15, 0" >
-            <StackPanel.Resources>
+        <Grid Margin="15, 0" >
+            <Grid.Resources>
                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
                     <Setter Property="Margin" Value="0,15,0,0"/>
                 </Style>
-            </StackPanel.Resources>
-            <TextBox Text="{Binding Title}" materialDesign:HintAssist.Hint="Title" Margin="0"/>
-            <TextBox Text="{Binding Authors}" materialDesign:HintAssist.Hint="Authors"/>
-            <TextBox Text="{Binding Isbn13}" materialDesign:HintAssist.Hint="Isbn13"/>
-            <TextBox Text="{Binding Isbn10}" materialDesign:HintAssist.Hint="Isbn10"/>
-            <TextBox Text="{Binding ReleaseDate}" materialDesign:HintAssist.Hint="Release date"/>
-            <TextBox Text="{Binding BookLink}" materialDesign:HintAssist.Hint="Link"/>
-
-            <ComboBox materialDesign:HintAssist.Hint="Location" Margin="0, 15, 0, 0">
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" Text="{Binding Title}" materialDesign:HintAssist.Hint="Title" Margin="0"/>
+            <TextBox Grid.Row="1" Text="{Binding Authors}" materialDesign:HintAssist.Hint="Authors"/>
+            <TextBox Grid.Row="2" Text="{Binding Isbn13}" materialDesign:HintAssist.Hint="Isbn13"/>
+            <TextBox Grid.Row="3" Text="{Binding Isbn10}" materialDesign:HintAssist.Hint="Isbn10"/>
+            <TextBox Grid.Row="4" Text="{Binding ReleaseDate}" materialDesign:HintAssist.Hint="Release date"/>
+            <TextBox Grid.Row="5" Text="{Binding BookLink}" materialDesign:HintAssist.Hint="Link"/>
+            <ComboBox Grid.Row="6" materialDesign:HintAssist.Hint="Location" Margin="0, 15, 0, 0" Text="{Binding Location}">
                 <ComboBoxItem Content="Næstved" />
                 <ComboBoxItem Content="Odense" />
             </ComboBox>
-
-            <Button Margin="0, 30, 0, 0">UPDATE</Button>
-        </StackPanel>
+            <Button Content="Update" Grid.Row="8"  VerticalAlignment="Bottom"/>
+        </Grid>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Image Source="{Binding ImageSource}" Grid.Row="2"/>
+            <Image Source="{Binding ImageSource}" VerticalAlignment="Top" />
+            <Button Grid.Row="2" Style="{StaticResource MaterialDesignRaisedDarkButton}" BorderThickness="0" Width="75" Background="#E25141">
+                <materialDesign:PackIcon Kind="Trash"/>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

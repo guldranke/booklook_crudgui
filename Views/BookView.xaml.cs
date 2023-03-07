@@ -15,15 +15,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace booklook_crudgui.Views
-{
+namespace booklook_crudgui.Views {
     /// <summary>
     /// Interaction logic for BookView.xaml
     /// </summary>
-    public partial class BookView : UserControl
-    {
-        public BookView()
-        {
+    public partial class BookView : UserControl {
+        public BookView() {
             InitializeComponent();
         }
     }
