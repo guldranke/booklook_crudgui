@@ -1,0 +1,80 @@
+﻿<Window x:Class="booklook_crudgui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:booklook_crudgui.ViewModels"
+        xmlns:views="clr-namespace:booklook_crudgui.Views"
+        mc:Ignorable="d"
+        Height="450" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        Loaded="WindowLoaded"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+        <DataTemplate DataType="{x:Type viewmodels:BookViewModel}">
+            <views:BookView />
+        </DataTemplate>
+    </Window.Resources>
+    <Border 
+        Background="{DynamicResource MaterialDesignPaper}"
+        CornerRadius="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Grid Grid.ColumnSpan="2" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="75"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="BookLook" VerticalAlignment="Center" Margin="10, 0"/>
+                <Button 
+                    Grid.Column="2"
+                    Click="CloseButtonClicked"
+                    Background="Transparent" 
+                    BorderThickness="0">
+                    <materialDesign:PackIcon 
+                        Width="20"
+                        Height="20"
+                        Kind="Close"/>
+                </Button>
+            </Grid>
+
+            <!-- Book list -->
+            <ListBox 
+                Background="{DynamicResource MaterialDesignDarkSeparatorBackground}"
+                materialDesign:ListBoxItemAssist.ShowSelection="True"
+                ItemsSource="{Binding Books}"
+                SelectionMode="Single"
+                DisplayMemberPath="Title"
+                SelectedValuePath="Id"
+                SelectionChanged="SelectedBookChanged"
+                Grid.Row="2"/>
+            <ProgressBar 
+                Visibility="{Binding BooksLoading, Converter={StaticResource BoolToVisibility}}"
+                IsIndeterminate="True"
+                Style="{StaticResource MaterialDesignCircularProgressBar}"
+                Value="50"
+                Grid.Row="2"/>
+
+            <!-- BookView -->
+            <ContentControl Grid.Column="2" Grid.Row="2" Content="{Binding SelectedBookContext}"/>
+        </Grid>
+    </Border>
+</Window>
