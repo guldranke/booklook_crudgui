@@ -53,6 +53,9 @@ namespace booklook_crudgui {
         /// <param name="e"></param>
         private void SelectedBookChanged(object sender, SelectionChangedEventArgs e) {
             Book book = (Book)((ListBox)sender).SelectedItem;
+
+            if (book == null) return;
+
             Trace.WriteLine($"BOOK -> {book.Id} : {book.Title}");
 
             BookViewModel selectedBookContext = new BookViewModel().CreateFromBook(book);
@@ -63,7 +66,7 @@ namespace booklook_crudgui {
         }
 
         /// <summary>
-        ///     Make window draggable as we have WindowStyle="None" in MainWindow.xaml
+        ///     Make the window draggable as we have WindowStyle="None" in MainWindow.xaml
         /// </summary>
         /// <param name="e"></param>
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e) {
@@ -72,6 +75,11 @@ namespace booklook_crudgui {
             this.DragMove();
         }
 
+        /// <summary>
+        ///     Close the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseButtonClicked(object sender, RoutedEventArgs e) {
             Application.Current.Shutdown();
         }
