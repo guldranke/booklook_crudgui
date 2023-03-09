@@ -60,8 +60,41 @@ namespace booklook_crudgui.Views {
                     mwContext.Books = filteredBooks;
                     mw.DataContext = mwContext;
                 });
-            } catch (Exception ex) {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+            } catch {
+                MessageBox.Show("There was an error deleting the book", "Error", MessageBoxButton.OK);
+            }
+        }
+
+        /// <summary>
+        ///     On button click, update the selected book
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void UpdateButtonClick(object sender, RoutedEventArgs e) {
+            BookViewModel context = (BookViewModel)DataContext;
+            RestService restService = new();
+
+            try {
+                await restService.PutBook(Book.CreateFromContext(context));
+                MainWindow mw = ((MainWindow)Application.Current.MainWindow);
+                mw.Dispatcher.Invoke(() => {
+                    MainViewModel mwContext = (MainViewModel)mw.DataContext;
+
+                    Book selectedBook = mwContext.Books.Find(book => book.Id == context.Id)!;
+                    int index = mwContext.Books.IndexOf(selectedBook);
+                    if (index == -1) return;
+
+                    // clone the list so it rerenders
+                    List<Book> books = new(mwContext.Books) {
+                        [index] = Book.CreateFromContext(context)
+                    };
+
+                    mwContext.Books = books;
+                    mw.DataContext = mwContext;
+                });
+
+            } catch {
+                MessageBox.Show("There was an error updating the book", "Error", MessageBoxButton.OK);
             }
         }
     }

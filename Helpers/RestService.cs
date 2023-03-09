@@ -49,11 +49,22 @@ namespace booklook_crudgui.Helpers {
         ///     DELETE a single book from the database
         /// </summary>
         /// <param name="id"></param>
-        public async Task<Book> DeleteBook(long id) {
-            Book book = await GetBook(id);
-            await _client.DeleteAsync($"http://192.168.0.11:5001/api/books/{id}");
+        public async Task<HttpResponseMessage> DeleteBook(long id) {
+            HttpResponseMessage response = await _client.DeleteAsync($"http://192.168.0.11:5001/api/books/{id}");
 
-            return book;
+            return response;
+        }
+
+        /// <summary>
+        ///     PUT a single book into the database
+        /// </summary>
+        /// <param name="book"></param>
+        /// <param name="location"></param>
+        public async Task<HttpResponseMessage> PutBook(Book book) {
+            StringContent request = new StringContent(JsonSerializer.Serialize(book), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await _client.PutAsync($"http://192.168.0.11:5001/api/books/{book.Id}", request);
+
+            return response;
         }
     }
 }

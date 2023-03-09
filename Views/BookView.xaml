@@ -38,7 +38,11 @@
                 <ComboBoxItem Content="Næstved" />
                 <ComboBoxItem Content="Odense" />
             </ComboBox>
-            <Button Content="Update" Grid.Row="8"  VerticalAlignment="Bottom"/>
+            <Button 
+                Content="Update" 
+                Grid.Row="8" 
+                VerticalAlignment="Bottom"
+                Click="UpdateButtonClick"/>
         </Grid>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
