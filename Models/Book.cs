@@ -1,4 +1,5 @@
-﻿using System;
+﻿using booklook_crudgui.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,19 @@ namespace booklook_crudgui.Models {
         public string ReleaseDate { get; set; } = string.Empty;
         public string BookLink { get; set; } = string.Empty;
         public string Location { get; set; } = string.Empty;
+
+        public static Book CreateFromContext(BookViewModel context) {
+            return new Book() {
+                Id = context.Id,
+                Title = context.Title,
+                Authors = context.Authors,
+                ImageSource = context.ImageSource,
+                Isbn13 = context.Isbn13,
+                Isbn10 = context.Isbn10,
+                ReleaseDate = context.ReleaseDate,
+                BookLink = context.BookLink,
+                Location = context.Location,
+            };
+        }
     }
 }
