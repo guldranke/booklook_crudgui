@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using booklook_crudgui.Models;
+﻿using booklook_crudgui.Models;
 
 namespace booklook_crudgui.ViewModels {
     public class BookViewModel : BaseViewModel {
@@ -35,7 +30,7 @@ namespace booklook_crudgui.ViewModels {
                 OnPropertyChanged();
             }
         }
-        private string _isbn13 = string.Empty ;
+        private string _isbn13 = string.Empty;
         public string Isbn13 {
             get => _isbn13; set {
                 _isbn13 = value;

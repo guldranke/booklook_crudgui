@@ -7,7 +7,6 @@ using booklook_crudgui.Helpers;
 using booklook_crudgui.ViewModels;
 using booklook_crudgui.Models;
 using System.Diagnostics;
-using System.Linq;
 
 namespace booklook_crudgui {
     /// <summary>

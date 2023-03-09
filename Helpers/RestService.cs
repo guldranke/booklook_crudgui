@@ -1,12 +1,9 @@
 ﻿using booklook_crudgui.Models;
 using System.Collections.Generic;
-using System;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-
 
 namespace booklook_crudgui.Helpers {
     public class RestService {
