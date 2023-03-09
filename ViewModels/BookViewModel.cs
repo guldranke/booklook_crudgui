@@ -66,6 +66,14 @@ namespace booklook_crudgui.ViewModels {
             }
         }
 
+        private string? _notificationContent = null;
+        public string? NotificationContent {
+            get => _notificationContent; set {
+                _notificationContent = value;
+                OnPropertyChanged();
+            }
+        }
+
         public static BookViewModel CreateFromBook(Book book) {
             return new BookViewModel() {
                 Id = book.Id,

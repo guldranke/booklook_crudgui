@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
+using System;
 
 namespace booklook_crudgui.Views {
     /// <summary>
@@ -49,6 +51,8 @@ namespace booklook_crudgui.Views {
                     mwContext.Books = filteredBooks;
                     mw.DataContext = mwContext;
                 });
+
+                ((BookViewModel)DataContext).NotificationContent = "Succesfully deleted the book";
             } catch {
                 MessageBox.Show("There was an error deleting the book", "Error", MessageBoxButton.OK);
             }
@@ -82,9 +86,37 @@ namespace booklook_crudgui.Views {
                     mw.DataContext = mwContext;
                 });
 
+                context.NotificationContent = "Succesfully updated the book";
             } catch {
                 MessageBox.Show("There was an error updating the book", "Error", MessageBoxButton.OK);
             }
+        }
+
+        /// <summary>
+        ///     Remove the notifcation after 5 seconds
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NotificationIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e) {
+            Border notification = (Border)sender;
+
+            if (!((bool)e.NewValue) || notification.Visibility == Visibility.Hidden) {
+                return;
+            }
+
+            BookViewModel context = (BookViewModel)DataContext;
+            Delay(5000, () => context.NotificationContent = null);
+        }
+
+        /// <summary>
+        ///     Delay helper method, only used for NotificationIsVisibleChanged
+        /// </summary>
+        /// <param name="milliseconds"></param>
+        /// <param name="action"></param>
+        private static void Delay(int milliseconds, Action action) {
+            var t = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(milliseconds) };
+            t.Tick += (o, e) => { t.Stop(); action.Invoke(); };
+            t.Start();
         }
     }
 }
