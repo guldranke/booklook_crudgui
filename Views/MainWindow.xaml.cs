@@ -39,7 +39,6 @@ namespace booklook_crudgui {
             } finally {
                 MainViewModel context = (MainViewModel)DataContext;
                 context.BooksLoading = false;
-                DataContext = context;
             }
         }
 
@@ -61,7 +60,6 @@ namespace booklook_crudgui {
             BookViewModel selectedBookContext = BookViewModel.CreateFromBook(book);
 
             context.SelectedBookContext = selectedBookContext;
-            DataContext = context;
         }
 
         /// <summary>

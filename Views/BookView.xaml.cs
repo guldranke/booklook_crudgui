@@ -49,7 +49,6 @@ namespace booklook_crudgui.Views {
 
 
                     mwContext.Books = filteredBooks;
-                    mw.DataContext = mwContext;
                 });
 
                 ((BookViewModel)DataContext).NotificationContent = "Succesfully deleted the book";
@@ -83,7 +82,6 @@ namespace booklook_crudgui.Views {
                     };
 
                     mwContext.Books = books;
-                    mw.DataContext = mwContext;
                 });
 
                 context.NotificationContent = "Succesfully updated the book";
