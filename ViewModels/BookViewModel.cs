@@ -71,7 +71,7 @@ namespace booklook_crudgui.ViewModels {
             }
         }
 
-        public BookViewModel CreateFromBook(Book book) {
+        public static BookViewModel CreateFromBook(Book book) {
             return new BookViewModel() {
                 Id = book.Id,
                 Title = book.Title,

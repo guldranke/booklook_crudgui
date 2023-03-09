@@ -30,10 +30,8 @@ namespace booklook_crudgui {
 
             try {
                 List<Book> books = await restService.GetBooks();
-                Book firstBook = books.First();
                 MainViewModel context = new() {
                     Books = books,
-                    SelectedBookContext = new BookViewModel().CreateFromBook(firstBook)
                 };
                 DataContext = context;
             } catch(Exception ex) {
@@ -58,7 +56,7 @@ namespace booklook_crudgui {
 
             Trace.WriteLine($"BOOK -> {book.Id} : {book.Title}");
 
-            BookViewModel selectedBookContext = new BookViewModel().CreateFromBook(book);
+            BookViewModel selectedBookContext = BookViewModel.CreateFromBook(book);
 
             MainViewModel context = (MainViewModel)DataContext;
             context.SelectedBookContext = selectedBookContext;
