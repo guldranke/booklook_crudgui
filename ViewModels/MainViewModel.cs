@@ -14,6 +14,16 @@ namespace booklook_crudgui.ViewModels {
             get => _books; set {
                 _books = value;
                 OnPropertyChanged();
+                OnPropertyChanged("BookIndex");
+            }
+        }
+
+        public int BookIndex {
+            get {
+                if (_selectedBookContext == null) return 0;
+
+                Book selectedBook = _books.Find(book => book.Id == _selectedBookContext.Id)!;
+                return _books.IndexOf(selectedBook);
             }
         }
 

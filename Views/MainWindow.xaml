@@ -65,7 +65,8 @@
                 DisplayMemberPath="Title"
                 SelectedValuePath="Id"
                 SelectionChanged="SelectedBookChanged"
-                Grid.Row="2"/>
+                Grid.Row="2"
+                SelectedIndex="{Binding BookIndex, Mode=OneWay}"/>
             <ProgressBar 
                 Visibility="{Binding BooksLoading, Converter={StaticResource BoolToVisibility}}"
                 IsIndeterminate="True"
