@@ -46,7 +46,13 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Image Source="{Binding ImageSource}" VerticalAlignment="Top" />
-            <Button Grid.Row="2" Style="{StaticResource MaterialDesignRaisedDarkButton}" BorderThickness="0" Width="75" Background="#E25141">
+            <Button 
+                Grid.Row="2" Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                BorderThickness="0" 
+                Width="75" 
+                Background="#E25141"
+                Click="DeleteButtonClick"
+                HorizontalAlignment="Right">
                 <materialDesign:PackIcon Kind="Trash"/>
             </Button>
         </Grid>

@@ -44,5 +44,16 @@ namespace booklook_crudgui.Helpers {
             // use null forgiving operator (!) here as we know the book exists
             return JsonSerializer.Deserialize<Book>(content, _serializerOptions)!;
         }
+
+        /// <summary>
+        ///     DELETE a single book from the database
+        /// </summary>
+        /// <param name="id"></param>
+        public async Task<Book> DeleteBook(long id) {
+            Book book = await GetBook(id);
+            await _client.DeleteAsync($"http://192.168.0.11:5001/api/books/{id}");
+
+            return book;
+        }
     }
 }
