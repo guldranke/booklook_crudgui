@@ -50,15 +50,17 @@ namespace booklook_crudgui {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SelectedBookChanged(object sender, SelectionChangedEventArgs e) {
+            MainViewModel context = (MainViewModel)DataContext;
             Book book = (Book)((ListBox)sender).SelectedItem;
 
             if (book == null) return;
+            bool sameBook = context.SelectedBookContext != null && context.SelectedBookContext.Id == book.Id;
+            if (sameBook) return;
 
             Trace.WriteLine($"BOOK -> {book.Id} : {book.Title}");
 
             BookViewModel selectedBookContext = BookViewModel.CreateFromBook(book);
 
-            MainViewModel context = (MainViewModel)DataContext;
             context.SelectedBookContext = selectedBookContext;
             DataContext = context;
         }
